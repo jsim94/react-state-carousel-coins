@@ -12,6 +12,12 @@ function Carousel(props) {
   const goForward = () => setCardIdx(cardIdx + 1);
   const goBackward = () => setCardIdx(cardIdx - 1);
 
+  let hideLeft,
+    hideRight = false;
+
+  if (cardIdx === 0) hideLeft = true;
+  else if (cardIdx === props.cardData.length - 1) hideRight = true;
+
   return (
     <div className="Carousel">
       <h1>{props.title}</h1>
@@ -20,6 +26,7 @@ function Carousel(props) {
           className="fas fa-chevron-circle-left fa-2x"
           onClick={goBackward}
           data-testid="left-arrow"
+          style={hideLeft ? {display:'none'} : null} 
         />
         <Card
           caption={card.caption}
@@ -31,6 +38,7 @@ function Carousel(props) {
           className="fas fa-chevron-circle-right fa-2x"
           onClick={goForward}
           data-testid="right-arrow"
+          style={hideRight ? {display:'none'} : null}
         />
       </div>
     </div>
